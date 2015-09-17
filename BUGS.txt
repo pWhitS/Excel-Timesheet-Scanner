@@ -1,0 +1,57 @@
+8-22-15:
+Bug Fix - implemented loading of special names from config file
+
+Imported CSheetData into timecalc.py
+	- Mutable objects are being shared as expected
+
+New test excel file - Shutdown Staff Schedule 2015
+	- Looks to be properly formatted =)
+	- Added new worksheet names and max cells to config file
+	- Testing bug fixes on one worksheet at a time
+
+
+8-18-15:
+Added output file as a parameter in the configuration file.
+- Program now outputs to a file
+
+Excel file has all properly formatted times.
+- Time parser seems to work with proper time formats
+- Probably needs more in-depth testing  
+
+Could use some comments.
+- Code base is growing to be somewhat large and complex
+
+Bugs:
+- employee.checkTotalHours()
+	- Fails at full scale because of badly designed scheduled hours calculator
+	- Rething how scheduled hours are calculated
+	- Need to deal with multiple scheduled ranges for one day per name  
+- Special cell values not always delt with
+	- implement loaded special names from config file
+
+
+8-16-15:
+Added configuration file and input/parsing of that file
+- Created config.py
+	- CConfigParser class
+- Created xlscan.conf
+	- Hopfully helpful comments
+	- Example configuration
+
+
+8-15-15:
+Added time parsing logic to deal more accuratly with time range calculation
+- Converts internally to 24-hour time
+- Uses RegEx and datetime.datetime library for parsing time strings
+- Mutable attributes move into __init__() 
+	they were being shared accross class instances
+
+Bugs:
+- the 12:00am problem
+	time ranges such as 3:00pm-12:00am do not calculate correctly
+	3:00pm -> 15:00
+	12:00am -> 0:00
+
+- Excel sheet is being read incorrectly at times.
+	blank cells after 1 hour blocks are being read as .5 misc_hours
+	 
